@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContactAppComponent } from './contact-app/contact-app.component';
 
 @NgModule({
@@ -10,7 +11,8 @@ import { ContactAppComponent } from './contact-app/contact-app.component';
     ContactAppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
