@@ -1,0 +1,18 @@
+header {
+  background-color: lightsteelblue;
+  padding: 1em;
+}
+
+header div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#author {
+  display: block;
+  text-align: right;
+  font-style: italic;
+  font-size: 50%;
+  color: darkblue;
+}
