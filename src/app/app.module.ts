@@ -6,6 +6,7 @@ import { ContactAppComponent } from './contact-app/contact-app.component';
 import { ContactItemComponent } from './contact-item/contact-item.component';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { ContactAddComponent } from './contact-add/contact-add.component';
+import { ContactDetailComponent } from './contact-detail/contact-detail.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -18,6 +19,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
     ContactItemComponent,
     ContactListComponent,
     ContactAddComponent,
+    ContactDetailComponent
   ],
   imports: [
     BrowserModule,
