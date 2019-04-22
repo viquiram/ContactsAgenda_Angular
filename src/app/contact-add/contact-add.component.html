@@ -1,0 +1,12 @@
+<form id="add-contact-form">
+  <label for="first-name">First Name</label>
+  <div><input type="text" name="first-name" id="first-name" required></div>
+  <label for="last-name">Last Name</label>
+  <div><input type="text" name="last-name" id="last-name" required></div>
+  <label for="phone">Phone Number</label>
+  <div><input type="tel" name="phone" id="phone" required></div>
+  <label for="email">E-mail</label>
+  <div><input type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required></div>
+  <button (click)='saveContact()' id ="saveBtn" type="submit">Save New Contact</button>
+  <button (click)='resetContact()' id ="cancelBtn" type="button">Cancel</button>
+</form>
