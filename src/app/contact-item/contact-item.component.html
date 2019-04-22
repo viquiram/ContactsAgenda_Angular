@@ -1,0 +1,6 @@
+<div (click)='goDetail()' id="contactItem">
+  <button (click)='removeContact()' id ="removeBtn"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+  <h3>{{contact.lastName}}, {{contact.firstName}}</h3>
+  <p>{{contact.phone}}</p>
+  <p>{{contact.email}}</p>
+</div>
