@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Contact } from '../contact';
 
 @Component({
@@ -11,8 +10,7 @@ export class ContactItemComponent implements OnInit {
 
   @Input() contact: Contact;
   @Output() clickRemove: EventEmitter<number> = new EventEmitter<number>();
-
-  faTrashAlt = faTrashAlt;
+  @Output() clickDetail: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() { }
 

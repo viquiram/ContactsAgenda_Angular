@@ -1,0 +1,8 @@
+<ul id="contact-list">
+  <li *ngFor="let contact of contacts">
+    <app-contact-item [contact]="contact"
+                      (clickRemove)='onRemoveContact($event)'
+                      (clickDetail)='onGoDetail($event)'>
+    </app-contact-item>
+  </li>
+</ul>
