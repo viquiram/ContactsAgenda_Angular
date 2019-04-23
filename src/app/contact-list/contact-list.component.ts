@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CONTACTS } from '../mock-contacts';
+import { ContactService } from '../contact.service';
+import {Contact} from '../contact';
 
 @Component({
   selector: 'app-contact-list',
@@ -8,27 +9,25 @@ import { CONTACTS } from '../mock-contacts';
 })
 export class ContactListComponent implements OnInit {
 
-  contacts = CONTACTS;
+  contacts: Contact[];
 
-  constructor() { }
+  constructor(private contactService: ContactService) { }
 
   ngOnInit() {
+    this.getContacts();
   }
 
-  removeContactById(id: number) {
-    let i: number;
-    for ( i = 0; i < this.contacts.length; i++) {
-      if ( this.contacts[i].id === id ) {
-        this.contacts.splice(i, 1);
-      }
-    }
+  getContacts(): void {
+    this.contactService.getContacts()
+      .subscribe(contacts => this.contacts = contacts);
   }
 
   onRemoveContact(id: number): void {
-    this.removeContactById(id);
+    this.contacts = this.contacts.filter(contact => contact.id !== id);
+    this.contactService.deleteContact(id).subscribe();
   }
 
   onGoDetail(id: number): void {
-
+    // TODO
   }
 }

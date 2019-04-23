@@ -22,6 +22,6 @@ export class ContactItemComponent implements OnInit {
   }
 
   goDetail() {
-
+    this.clickDetail.emit(this.contact.id);
   }
 }

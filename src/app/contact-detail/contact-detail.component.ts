@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Contact} from '../contact';
+import { ContactService } from '../contact.service';
+import {Contact} from '../contact';
+
 
 @Component({
   selector: 'app-contact-detail',
@@ -10,21 +12,34 @@ export class ContactDetailComponent implements OnInit {
 
   @Input() contact: Contact;
 
-  constructor() { }
+  constructor(private contactService: ContactService) { }
 
   ngOnInit() {
   }
 
   saveChanges() {
-    // TODO
+    this.contact.firstName = (document.getElementById('first-name') as HTMLInputElement).value;
+    this.contact.lastName = (document.getElementById('last-name') as HTMLInputElement).value;
+    this.contact.phone = (document.getElementById('phone') as HTMLInputElement).value;
+    this.contact.email = (document.getElementById('email') as HTMLInputElement).value;
+    this.contactService.modifyContact(this.contact).subscribe();
+    this.goBack();
   }
 
   cancelChanges() {
-    // TODO
+    (document.getElementById('first-name') as HTMLInputElement).value = '';
+    (document.getElementById('last-name') as HTMLInputElement).value = '';
+    (document.getElementById('phone') as HTMLInputElement).value = '';
+    (document.getElementById('email') as HTMLInputElement).value = '';
+    this.goBack();
   }
 
   deleteContact() {
-    // TODO
+    this.contactService.deleteContact(this.contact.id).subscribe();
+    this.goBack();
   }
 
+  goBack() {
+    // TODO
+  }
 }

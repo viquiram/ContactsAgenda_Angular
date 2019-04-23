@@ -1,4 +1,4 @@
-<ul id="contact-list">
+<ul id="contact-list" *ngIf="contacts.length">
   <li *ngFor="let contact of contacts">
     <app-contact-item [contact]="contact"
                       (clickRemove)='onRemoveContact($event)'

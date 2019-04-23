@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-contact-add',
@@ -13,10 +13,13 @@ export class ContactAddComponent implements OnInit {
   }
 
   saveContact() {
-
+    // TODO
   }
 
   resetContact() {
-
+    (document.getElementById('first-name') as HTMLInputElement).value = '';
+    (document.getElementById('last-name') as HTMLInputElement).value = '';
+    (document.getElementById('phone') as HTMLInputElement).value = '';
+    (document.getElementById('email') as HTMLInputElement).value = '';
   }
 }
