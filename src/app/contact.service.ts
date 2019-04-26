@@ -16,7 +16,7 @@ export class ContactService {
     return of(this.contacts);
   }
 
-  deleteContact(id: number): Observable<Contact> {
+  deleteContact(id: number): Observable<Contact[]> {
     let i: number;
     for ( i = 0; i < this.contacts.length; i++) {
       if ( this.contacts[i].id === id ) {
@@ -25,30 +25,34 @@ export class ContactService {
           " from your contacts?");
         if (confirmation) {
           this.contacts.splice(i, 1);
+          return of(this.contacts);
         }
-        return of(null);
       }
     }
   }
 
-  addContact(contact: Contact): Observable<Contact> {
+  addContact(contact: Contact): Observable<Contact[]> {
     let i: number;
-    for (i = 0; i <= this.contacts.length; i++) {
+    for (i = 0; i < this.contacts.length; i++) {
       if (this.contacts[i].id !== i) {
         contact.id = i;
         this.contacts.splice(i, 0, contact);
         alert("The new contact has been saved successfully.");
-        return of(this.contacts[i]);
+        return of(this.contacts);
       }
     }
+    contact.id = this.contacts.length;
+    this.contacts.push(contact);
+    alert("The new contact has been saved successfully.");
+    return of(this.contacts);
   }
 
-  modifyContact(contact: Contact): Observable<Contact> {
+  modifyContact(contact: Contact): Observable<Contact[]> {
     let i: number;
     for ( i = 0; i < this.contacts.length; i++) {
       if ( this.contacts[i].id === contact.id ) {
         this.contacts.splice(i, 1, contact);
-        return of(this.contacts[i]);
+        return of(this.contacts);
       }
     }
   }

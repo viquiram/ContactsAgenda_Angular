@@ -1,12 +1,12 @@
-<form>
+<form [formGroup]="contactForm">
   <label for="first-name">First Name</label>
-  <div><input type="text" name="first-name" id="first-name" required></div>
+  <div><input type="text" name="first-name" id="first-name" formControlName="firstNameInput" [(ngModel)]="firstName"></div>
   <label for="last-name">Last Name</label>
-  <div><input type="text" name="last-name" id="last-name" required></div>
+  <div><input type="text" name="last-name" id="last-name" formControlName="lastNameInput" [(ngModel)]="lastName"></div>
   <label for="phone">Phone Number</label>
-  <div><input type="tel" name="phone" id="phone" required></div>
+  <div><input type="tel" name="phone" id="phone" formControlName="phoneInput" [(ngModel)]="phone"></div>
   <label for="email">E-mail</label>
-  <div><input type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required></div>
-  <button (click)='saveContact()' class ="saveBtn" type="submit">Save New Contact</button>
-  <button (click)='resetContact()' class ="cancelBtn" type="button">Cancel</button>
+  <div><input type="email" name="email" id="email" formControlName="emailInput" [(ngModel)]="email"></div>
+  <button (click)='saveContact()' class="saveBtn" type="submit" [disabled]="!contactForm.valid">Save New Contact</button>
+  <button (click)='resetContact()' class="cancelBtn" type="button" [disabled]="!firstName.length && !lastName.length && !phone.length && !email.length">Cancel</button>
 </form>

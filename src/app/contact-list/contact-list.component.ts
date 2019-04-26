@@ -23,8 +23,8 @@ export class ContactListComponent implements OnInit {
   }
 
   onRemoveContact(id: number): void {
-    this.contacts = this.contacts.filter(contact => contact.id !== id);
-    this.contactService.deleteContact(id).subscribe();
+    this.contactService.deleteContact(id)
+      .subscribe(contacts => this.contacts = contacts);
   }
 
   onGoDetail(id: number): void {

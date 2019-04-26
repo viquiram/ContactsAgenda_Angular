@@ -43,3 +43,7 @@ form button.cancelBtn {
   float: right;
   background-color: firebrick;
 }
+
+form button:disabled {
+  background-color: darkgrey;
+}
