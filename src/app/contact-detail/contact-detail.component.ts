@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, HostBinding, OnInit} from '@angular/core';
 import { ContactService } from '../contact.service';
 import {Contact} from '../contact';
-
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-contact-detail',
@@ -9,37 +10,66 @@ import {Contact} from '../contact';
   styleUrls: ['./contact-detail.component.scss']
 })
 export class ContactDetailComponent implements OnInit {
+  @HostBinding('class') classes = 'one-column';
 
-  @Input() contact: Contact;
+  contactForm: FormGroup;
 
-  constructor(private contactService: ContactService) { }
+  id = 0;
+  firstName = '';
+  lastName = '';
+  phone = '';
+  email = '';
 
-  ngOnInit() {
+  constructor(
+    private contactService: ContactService,
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router) {
   }
 
+  ngOnInit() {
+    this.contactForm = this.formBuilder.group({
+      firstNameInput: ['', Validators.required],
+      lastNameInput: ['', Validators.required],
+      phoneInput: ['', Validators.required],
+      emailInput: ['', [Validators.required, Validators.email]],
+    });
+    this.getContact();
+  }
+
+  getContact(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.contactService.getContact(id)
+      .subscribe(contact => {
+        this.id = contact.id;
+        this.firstName = contact.firstName;
+        this.lastName = contact.lastName;
+        this.phone = contact.phone;
+        this.email = contact.email;
+      });
+}
+
   saveChanges() {
-    this.contact.firstName = (document.getElementById('first-name') as HTMLInputElement).value;
-    this.contact.lastName = (document.getElementById('last-name') as HTMLInputElement).value;
-    this.contact.phone = (document.getElementById('phone') as HTMLInputElement).value;
-    this.contact.email = (document.getElementById('email') as HTMLInputElement).value;
-    this.contactService.modifyContact(this.contact).subscribe();
+    const contact = new Contact();
+    contact.id = this.id;
+    contact.firstName = this.firstName;
+    contact.lastName = this.lastName;
+    contact.phone = this.phone;
+    contact.email = this.email;
+    this.contactService.modifyContact(contact);
     this.goBack();
   }
 
   cancelChanges() {
-    (document.getElementById('first-name') as HTMLInputElement).value = '';
-    (document.getElementById('last-name') as HTMLInputElement).value = '';
-    (document.getElementById('phone') as HTMLInputElement).value = '';
-    (document.getElementById('email') as HTMLInputElement).value = '';
     this.goBack();
   }
 
   deleteContact() {
-    this.contactService.deleteContact(this.contact.id).subscribe();
+    this.contactService.deleteContact(this.id);
     this.goBack();
   }
 
   goBack() {
-    // TODO
+    this.router.navigate(['/']);
   }
 }

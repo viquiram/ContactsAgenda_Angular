@@ -1,13 +1,13 @@
-<form *ngIf="contact">
+<form [formGroup]="contactForm">
   <button (click)='deleteContact()' class ="cancelBtn" type="button">Delete Contact</button>
   <label for="first-name">First Name</label>
-  <div><input type="text" name="first-name" id="first-name" value="{{contact.firstName}}" required></div>
+  <div><input type="text" name="first-name" id="first-name" formControlName="firstNameInput" [(ngModel)]="firstName"></div>
   <label for="last-name">Last Name</label>
-  <div><input type="text" name="last-name" id="last-name" value="{{contact.lastName}}" required></div>
+  <div><input type="text" name="last-name" id="last-name" formControlName="lastNameInput" [(ngModel)]="lastName"></div>
   <label for="phone">Phone Number</label>
-  <div><input type="tel" name="phone" id="phone" value="{{contact.phone}}" required></div>
+  <div><input type="tel" name="phone" id="phone" formControlName="phoneInput" [(ngModel)]="phone"></div>
   <label for="email">E-mail</label>
-  <div><input type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="{{contact.email}}" required></div>
-  <button (click)='saveChanges()' class ="saveBtn" type="submit">Save Changes</button>
+  <div><input type="email" name="email" id="email" formControlName="emailInput" [(ngModel)]="email"></div>
+  <button (click)='saveChanges()' class ="saveBtn" type="submit" [disabled]="!contactForm.valid">Save Changes</button>
   <button (click)='cancelChanges()' class ="cancelBtn" type="button">Cancel Changes</button>
 </form>

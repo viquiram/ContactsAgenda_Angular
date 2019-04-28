@@ -47,3 +47,17 @@ form button.cancelBtn {
 form button:disabled {
   background-color: darkgrey;
 }
+
+@media (min-width: 500px) {
+  .row {
+    display: flex;
+  }
+
+  .one-column {
+    flex: 100%;
+  }
+
+  .two-column {
+    flex: 50%;
+  }
+}

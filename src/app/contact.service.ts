@@ -10,7 +10,8 @@ import { CONTACTS } from './mock-contacts';
 export class ContactService {
   contacts = CONTACTS;
 
-  constructor() { }
+  constructor() {
+  }
 
   public getContacts(): Observable<Contact[]> {
     return of(this.contacts);
@@ -18,8 +19,8 @@ export class ContactService {
 
   deleteContact(id: number): Observable<Contact[]> {
     let i: number;
-    for ( i = 0; i < this.contacts.length; i++) {
-      if ( this.contacts[i].id === id ) {
+    for (i = 0; i < this.contacts.length; i++) {
+      if (this.contacts[i].id === id) {
         const confirmation = confirm("Do you want to remove " +
           this.contacts[i].firstName + " " + this.contacts[i].lastName +
           " from your contacts?");
@@ -49,10 +50,19 @@ export class ContactService {
 
   modifyContact(contact: Contact): Observable<Contact[]> {
     let i: number;
-    for ( i = 0; i < this.contacts.length; i++) {
-      if ( this.contacts[i].id === contact.id ) {
+    for (i = 0; i < this.contacts.length; i++) {
+      if (this.contacts[i].id === contact.id) {
         this.contacts.splice(i, 1, contact);
         return of(this.contacts);
+      }
+    }
+  }
+
+  getContact(id: number): Observable<Contact> {
+    let i: number;
+    for (i = 0; i < this.contacts.length; i++) {
+      if (this.contacts[i].id === id) {
+        return of(this.contacts[i]);
       }
     }
   }

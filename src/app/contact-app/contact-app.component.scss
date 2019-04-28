@@ -16,13 +16,3 @@ header div {
   font-size: 50%;
   color: darkblue;
 }
-
-@media (min-width: 500px) {
-  .contacts-row {
-    display: flex;
-  }
-
-  .contacts-column {
-    flex: 50%;
-  }
-}

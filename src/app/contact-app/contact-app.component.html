@@ -3,7 +3,7 @@
     <h1>{{title}}<span id="author">by {{author}}</span></h1>
   </div>
 </header>
-<section class="contacts-row">
-  <app-contact-add class="contacts-column"></app-contact-add>
-  <app-contact-list class="contacts-column"></app-contact-list>
+<section class="row">
+  <router-outlet></router-outlet>
+  <router-outlet name="list" *ngIf="route === '/'"></router-outlet>
 </section>

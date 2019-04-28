@@ -1,4 +1,4 @@
-import {Component, OnInit } from '@angular/core';
+import {Component, HostBinding, OnInit} from '@angular/core';
 import { ContactService } from '../contact.service';
 import {Contact} from '../contact';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./contact-add.component.scss']
 })
 export class ContactAddComponent implements OnInit {
+  @HostBinding('class') classes = 'two-column';
 
   contactForm: FormGroup;
 

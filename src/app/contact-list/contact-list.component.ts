@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostBinding, OnInit} from '@angular/core';
 import { ContactService } from '../contact.service';
 import {Contact} from '../contact';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-contact-list',
@@ -8,10 +9,11 @@ import {Contact} from '../contact';
   styleUrls: ['./contact-list.component.scss']
 })
 export class ContactListComponent implements OnInit {
+  @HostBinding('class') classes = 'two-column';
 
   contacts: Contact[];
 
-  constructor(private contactService: ContactService) { }
+  constructor(private contactService: ContactService, private router: Router) { }
 
   ngOnInit() {
     this.getContacts();
@@ -28,6 +30,6 @@ export class ContactListComponent implements OnInit {
   }
 
   onGoDetail(id: number): void {
-    // TODO
+    this.router.navigate(['/contact/', id]);
   }
 }
