@@ -8,9 +8,13 @@ import { CONTACTS } from './mock-contacts';
 })
 
 export class ContactService {
-  contacts = CONTACTS;
+  contacts: Contact[];
 
   constructor() {
+    this.contacts = store.get('contacts');
+    if (this.contacts == null) {
+      this.contacts = CONTACTS;
+    }
   }
 
   public getContacts(): Observable<Contact[]> {
@@ -26,6 +30,7 @@ export class ContactService {
           " from your contacts?");
         if (confirmation) {
           this.contacts.splice(i, 1);
+          store.set('contacts', this.contacts);
           return of(this.contacts);
         }
       }
@@ -38,12 +43,14 @@ export class ContactService {
       if (this.contacts[i].id !== i) {
         contact.id = i;
         this.contacts.splice(i, 0, contact);
+        store.set('contacts', this.contacts);
         alert("The new contact has been saved successfully.");
         return of(this.contacts);
       }
     }
     contact.id = this.contacts.length;
     this.contacts.push(contact);
+    store.set('contacts', this.contacts);
     alert("The new contact has been saved successfully.");
     return of(this.contacts);
   }
@@ -53,6 +60,7 @@ export class ContactService {
     for (i = 0; i < this.contacts.length; i++) {
       if (this.contacts[i].id === contact.id) {
         this.contacts.splice(i, 1, contact);
+        store.set('contacts', this.contacts);
         return of(this.contacts);
       }
     }
